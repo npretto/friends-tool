@@ -5,7 +5,7 @@ import App from './App';
 test('form submits two answers', () => {
   const { getAllByText } = render(<App />);
 
-  const text = getAllByText('Open up App.tsx to start working on your app!');
+  const text = getAllByText('Home Screen');
 
   expect(text).toBeDefined();
 });
