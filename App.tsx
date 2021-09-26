@@ -5,18 +5,18 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import './src/setupLocalizations';
 
-function HomeScreen() {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <Text> {i18n.t('welcome')}</Text>
     </View>
   );
-}
+};
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -24,7 +24,7 @@ function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default App;
 
