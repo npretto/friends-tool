@@ -1,5 +1,8 @@
 {
+  "address": "Address:",
+  "contacts": "Contacts",
   "delete": "Delete",
+  "email": "Email",
   "home": {
     "nav_title": "Home"
   },
@@ -7,5 +10,7 @@
   "mark-as-done": "mark as done",
   "mark-as-undone": "mark as not done",
   "permission-to-access-location-was-denied": "Permission to access location was denied",
+  "phone": "Phone",
+  "website": "Website",
   "welcome": "Welcome"
 }

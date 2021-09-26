@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { FinderFriendDetail } from './src/features/finder/FinderFriendDetail';
 import { FinderFriendsListScreen } from './src/features/finder/FinderFriendsListScreen';
 import { loadFriends } from './src/features/friends';
 import { persistor, store } from './src/features/store';
@@ -23,6 +24,7 @@ export type RootStackParamList = {
   todo: undefined;
   todo_detail: { id: EntityId; title: string };
   finder: undefined;
+  finder_detail: { id: EntityId; title: string };
 };
 
 const HomeScreen = () => {
@@ -81,6 +83,11 @@ const App = () => {
           name={'finder'}
           component={FinderFriendsListScreen}
           options={{ title: 'FINDER' }}
+        />
+        <Stack.Screen
+          name={'finder_detail'}
+          component={FinderFriendDetail}
+          options={() => ({ title: '' })}
         />
       </Stack.Navigator>
     </NavigationContainer>

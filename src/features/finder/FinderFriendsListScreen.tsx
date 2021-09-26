@@ -1,13 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { EntityId } from '@reduxjs/toolkit';
-import { Box, Button } from 'native-base';
+import { Box, Button, Factory } from 'native-base';
 import React from 'react';
-import { FlatList, Text } from 'react-native';
-import openMap from 'react-native-open-maps';
+import { FlatList, Text, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
-import { selectFriendsId } from '../friends';
+import { RootStackParamList } from '../../../App';
+import { navigateToFriend, selectFriendsId } from '../friends';
 import { selectFriendByIdWithDistance } from './finderSlice';
 import { formatDistance } from './formatDistance';
 import { useLocationWatch } from './useLocationWatch';
+
+const RNBTouchable = Factory(TouchableOpacity);
 
 export const FinderFriendsListScreen = () => {
   const friendsIds = useSelector(selectFriendsId);
@@ -26,30 +30,34 @@ export const FinderFriendsListScreen = () => {
 const FinderFriendListItem: React.FC<{ id: EntityId }> = ({ id }) => {
   const friend = useSelector(selectFriendByIdWithDistance(id));
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
     <Box
       borderBottomWidth="1"
       borderBottomColor="gray.500"
-      padding="3"
       flexDir="row"
       alignItems="center"
       justifyContent="space-between"
     >
-      <Box>
-        <Text>{friend.name}</Text>
-        {friend.distance && <Text>{formatDistance(friend.distance)} away</Text>}
-      </Box>
-      <Button
-        onPress={() => {
-          openMap({
-            longitude: Number(friend.address.geo.lng),
-            latitude: Number(friend.address.geo.lat),
-            navigate: true,
-          });
-        }}
+      <RNBTouchable
+        padding="3"
+        flex={1}
+        onPress={() =>
+          navigation.navigate('finder_detail', { id, title: friend.name })
+        }
       >
-        Navigate
-      </Button>
+        <Box>
+          <Text>{friend.name}</Text>
+          {friend.distance && (
+            <Text>{formatDistance(friend.distance)} away</Text>
+          )}
+        </Box>
+      </RNBTouchable>
+      <Box padding="3">
+        <Button onPress={() => navigateToFriend(friend)}>Navigate</Button>
+      </Box>
     </Box>
   );
 };
