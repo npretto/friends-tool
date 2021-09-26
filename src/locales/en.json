@@ -1,4 +1,5 @@
 {
+  "add-todo": "Add TODO",
   "address": "Address:",
   "contacts": "Contacts",
   "delete": "Delete",
@@ -11,6 +12,7 @@
   "mark-as-undone": "mark as not done",
   "permission-to-access-location-was-denied": "Permission to access location was denied",
   "phone": "Phone",
+  "todo-text-placeholder": "todo title",
   "website": "Website",
   "welcome": "Welcome"
 }

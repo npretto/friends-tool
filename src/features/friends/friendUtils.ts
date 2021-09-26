@@ -5,6 +5,7 @@ import { Friend } from './friend';
 
 export const getInitials = compose(join(''), map(head), split(' '));
 
+// not sure this should be in this feature folder
 export const navigateToFriend = (friend: Friend) => {
   openMap({
     longitude: Number(friend.address.geo.lng),
