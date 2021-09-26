@@ -4,12 +4,13 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import { EntityId } from '@reduxjs/toolkit';
-import i18n from 'i18n-js';
+import I18n from 'i18n-js';
 import { NativeBaseProvider } from 'native-base';
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { FinderFriendsListScreen } from './src/features/finder/FinderFriendsListScreen';
 import { loadFriends } from './src/features/friends';
 import { persistor, store } from './src/features/store';
 import { TodoFriendsListScreen } from './src/features/todo';
@@ -30,7 +31,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Text> {i18n.t('welcome')}</Text>
+      <Text> {I18n.t('welcome')}</Text>
       <Button
         onPress={() => {
           navigation.navigate('todo');
@@ -64,7 +65,7 @@ const App = () => {
         <Stack.Screen
           name={'home'}
           component={HomeScreen}
-          options={{ title: i18n.t('home.nav_title') }}
+          options={{ title: I18n.t('home.nav_title') }}
         />
         <Stack.Screen
           name={'todo'}
@@ -78,7 +79,7 @@ const App = () => {
         />
         <Stack.Screen
           name={'finder'}
-          component={HomeScreen}
+          component={FinderFriendsListScreen}
           options={{ title: 'FINDER' }}
         />
       </Stack.Navigator>

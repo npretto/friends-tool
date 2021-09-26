@@ -11,6 +11,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
+import { finderReducer } from './finder/finderSlice';
 import { friendsReducer } from './friends';
 import { todosReducer } from './todo/todoSlice';
 
@@ -21,6 +22,7 @@ const rootReducer = persistCombineReducers(
   {
     friends: friendsReducer,
     todos: todosReducer,
+    finder: finderReducer,
   }
 );
 

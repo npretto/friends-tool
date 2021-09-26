@@ -1,9 +1,11 @@
 {
+  "delete": "Delete",
   "home": {
     "nav_title": "Home"
   },
+  "less-than-one-km": "less than one km",
   "mark-as-done": "mark as done",
   "mark-as-undone": "mark as not done",
-  "welcome": "Welcome",
-  "delete": "Delete"
+  "permission-to-access-location-was-denied": "Permission to access location was denied",
+  "welcome": "Welcome"
 }
