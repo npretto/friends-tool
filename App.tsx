@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import i18n from 'i18n-js';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from './src/features/store';
 import './src/setupLocalizations';
 
 const HomeScreen = () => {
@@ -18,11 +20,16 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name={i18n.t('home.nav_title')} component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PersistGate persistor={persistor} loading={<Text>loading</Text>}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name={i18n.t('home.nav_title')}
+            component={HomeScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PersistGate>
   );
 };
 
