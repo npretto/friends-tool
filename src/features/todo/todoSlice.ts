@@ -31,12 +31,24 @@ export const todosSlice = createSlice({
 
       todosAdapter.addOne(state, { title, userId, completed: false, id });
     },
+    updateTodo: (
+      state,
+      action: PayloadAction<{ id: EntityId; completed: boolean }>
+    ) => {
+      const { id, completed } = action.payload;
+      todosAdapter.updateOne(state, { id, changes: { completed } });
+    },
+    deleteTodo: (state, action: PayloadAction<{ id: EntityId }>) => {
+      const { id } = action.payload;
+      todosAdapter.removeOne(state, id);
+    },
   },
 });
 
 export const todosReducer = todosSlice.reducer;
 
-export const { loadTodos, addTodo } = todosSlice.actions;
+export const { loadTodos, addTodo, updateTodo, deleteTodo } =
+  todosSlice.actions;
 
 export const {
   selectAll,

@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react-native';
+import I18n from 'i18n-js';
 import React from 'react';
 import App from '../../../App';
 
@@ -54,5 +55,51 @@ describe('[TODO] todos', () => {
     expect(queryByText(todoTitle)).toBeTruthy();
 
     expect(input.props.value).toBe('');
+  });
+
+  it('should toggle a todo', () => {
+    const todoTitle = 'Todo that will be added';
+
+    const { queryByText, getAllByA11yLabel } = render(<App />);
+
+    expect(queryByText(todoTitle)).toBeFalsy();
+    const button = queryByText('ToDo');
+    fireEvent.press(button);
+
+    const friendItem = queryByText('Kurtis Weissnat');
+
+    fireEvent.press(friendItem);
+
+    const toggle = getAllByA11yLabel(I18n.t('mark-as-done'))[0];
+
+    expect(toggle.props.isChecked).toBeFalsy();
+
+    fireEvent.press(toggle);
+
+    expect(toggle.props.isChecked).toBeTruthy();
+  });
+
+  it('should remove a todo', () => {
+    const todoTitle = 'Todo that will be added';
+
+    const { queryByText, getAllByA11yLabel } = render(<App />);
+
+    expect(queryByText(todoTitle)).toBeFalsy();
+    const button = queryByText('ToDo');
+    fireEvent.press(button);
+
+    const friendItem = queryByText('Kurtis Weissnat');
+
+    fireEvent.press(friendItem);
+
+    const firstDeleteButton = getAllByA11yLabel(I18n.t('delete'))[0];
+
+    expect(
+      queryByText('inventore aut nihil minima laudantium hic qui omnis')
+    ).toBeTruthy();
+
+    fireEvent.press(firstDeleteButton);
+
+    expect(queryByText(/invetore aut/)).toBeFalsy();
   });
 });

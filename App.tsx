@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native-stack';
 import { EntityId } from '@reduxjs/toolkit';
 import i18n from 'i18n-js';
+import { NativeBaseProvider } from 'native-base';
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { Provider, useDispatch } from 'react-redux';
@@ -85,10 +86,18 @@ const App = () => {
   );
 };
 
+// needed for testing
+const inset = {
+  frame: { x: 0, y: 0, width: 0, height: 0 },
+  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+};
+
 const ProvidersWrapper = () => (
   <PersistGate persistor={persistor} loading={<Text>loading</Text>}>
     <Provider store={store}>
-      <App />
+      <NativeBaseProvider initialWindowMetrics={inset}>
+        <App />
+      </NativeBaseProvider>
     </Provider>
   </PersistGate>
 );
