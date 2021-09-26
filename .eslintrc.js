@@ -24,5 +24,6 @@ module.exports = {
     'react-native/no-raw-text': 2,
     'react-native/no-single-element-style-arrays': 2,
     'prefer-arrow/prefer-arrow-functions': 2,
+    'react-hooks/exhaustive-deps': 'off', // if you're curious why ask me, tldr: i think it makes the code less immediate to read
   },
 };

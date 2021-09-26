@@ -12,6 +12,7 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import { friendsReducer } from './friends';
+import { todosReducer } from './todo/todoSlice';
 
 const logger = createLogger({});
 
@@ -19,6 +20,7 @@ const rootReducer = persistCombineReducers(
   { key: 'friend-tools', storage: AsyncStorage },
   {
     friends: friendsReducer,
+    todos: todosReducer,
   }
 );
 
