@@ -1,4 +1,10 @@
-import { createEntityAdapter, createSlice, EntityId } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSlice,
+  EntityId,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import { last } from 'ramda';
 import todosData from '../../data/todos.json';
 import { RootState } from '../store';
 import { Todo } from './todo';
@@ -15,12 +21,22 @@ export const todosSlice = createSlice({
   initialState,
   reducers: {
     loadTodos: (state) => todosAdapter.setAll(state, todosData),
+    addTodo: (
+      state,
+      action: PayloadAction<{ title: string; userId: EntityId }>
+    ) => {
+      const { title, userId } = action.payload;
+      // TODO: should find a way to override EntityId to be number
+      const id = (last(state.ids) as number) + 1;
+
+      todosAdapter.addOne(state, { title, userId, completed: false, id });
+    },
   },
 });
 
 export const todosReducer = todosSlice.reducer;
 
-export const { loadTodos } = todosSlice.actions;
+export const { loadTodos, addTodo } = todosSlice.actions;
 
 export const {
   selectAll,

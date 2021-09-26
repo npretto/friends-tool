@@ -30,4 +30,29 @@ describe('[TODO] todos', () => {
       getByText('inventore aut nihil minima laudantium hic qui omnis')
     ).toBeTruthy();
   });
+
+  it('should add a new todo', async () => {
+    const todoTitle = 'Todo that will be added';
+
+    const { queryByText, getByTestId } = render(<App />);
+
+    expect(queryByText(todoTitle)).toBeFalsy();
+    const button = queryByText('ToDo');
+    fireEvent.press(button);
+
+    const friendItem = queryByText('Kurtis Weissnat');
+
+    fireEvent.press(friendItem);
+
+    const input = getByTestId('todo_title_input');
+
+    fireEvent.changeText(input, todoTitle);
+
+    const addButton = queryByText(/add todo/i);
+    fireEvent.press(addButton);
+
+    expect(queryByText(todoTitle)).toBeTruthy();
+
+    expect(input.props.value).toBe('');
+  });
 });
