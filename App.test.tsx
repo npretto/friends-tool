@@ -5,7 +5,7 @@ import App from './App';
 test('app shows home', async () => {
   const { getAllByText } = render(<App />);
 
-  const text = getAllByText('Home Screen');
+  const text = getAllByText('Friends Tool');
 
   expect(text).toBeDefined();
 });

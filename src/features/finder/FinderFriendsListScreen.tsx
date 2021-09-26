@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { EntityId } from '@reduxjs/toolkit';
-import { Box, Button, Factory } from 'native-base';
+import I18n from 'i18n-js';
+import { Avatar, Box, Button, Factory, HStack, Stack, Text } from 'native-base';
 import React from 'react';
-import { FlatList, Text, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootStackParamList } from '../../../App';
-import { navigateToFriend } from '../friends';
+import { getInitials, navigateToFriend } from '../friends';
 import {
   selectFriendByIdWithDistance,
   selectFriendsSortedByDistance,
@@ -51,12 +52,19 @@ const FinderFriendListItem: React.FC<{ id: EntityId }> = ({ id }) => {
           navigation.navigate('finder_detail', { id, title: friend.name })
         }
       >
-        <Box>
-          <Text>{friend.name}</Text>
-          {friend.distance && (
-            <Text>{formatDistance(friend.distance)} away</Text>
-          )}
-        </Box>
+        <HStack alignItems="center">
+          <Avatar mr="4">{getInitials(friend.name)}</Avatar>
+          <Stack>
+            <Text fontSize="md">{friend.name}</Text>
+            {friend.distance && (
+              <Text>
+                {I18n.t('distance-away', {
+                  distance: formatDistance(friend.distance),
+                })}
+              </Text>
+            )}
+          </Stack>
+        </HStack>
       </RNBTouchable>
       <Box padding="3">
         <Button onPress={() => navigateToFriend(friend)}>Navigate</Button>

@@ -8,7 +8,7 @@ describe('formatDistance', () => {
   });
 
   it('should round to km', () => {
-    expect(formatDistance(11_111)).toBe('11km');
-    expect(formatDistance(100_999)).toBe('101km');
+    expect(formatDistance(11_111)).toBe('11 km');
+    expect(formatDistance(100_999)).toBe('101 km');
   });
 });

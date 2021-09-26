@@ -1,18 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { EntityId } from '@reduxjs/toolkit';
+import { Avatar, Factory, HStack, Stack, Text } from 'native-base';
 import React from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootStackParamList } from '../../../App';
-import { selectFriendById, selectFriendsId } from '../friends';
+import { getInitials, selectFriendById, selectFriendsId } from '../friends';
 import { RootState } from '../store';
+
+const RNBTouchable = Factory(TouchableOpacity);
 
 export const TodoFriendsListScreen = () => {
   const friendsIds = useSelector(selectFriendsId);
@@ -31,27 +28,27 @@ const TodoFriendListItem: React.FC<{ id: EntityId }> = ({ id }) => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
   return (
-    <View style={styles.itemContainer}>
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() =>
-          navigation.navigate('todo_detail', { id, title: friend.name })
-        }
-      >
-        <Text>{friend.name}</Text>
-      </TouchableOpacity>
-    </View>
+    <RNBTouchable
+      borderBottomWidth="1"
+      borderBottomColor="gray.500"
+      flexDir="row"
+      alignItems="center"
+      justifyContent="space-between"
+      padding="3"
+      flex={1}
+      onPress={() =>
+        navigation.navigate('todo_detail', { id, title: friend.name })
+      }
+    >
+      <HStack alignItems="center">
+        <Avatar mr="4">{getInitials(friend.name)}</Avatar>
+        <Stack>
+          <Text fontSize="md">{friend.name}</Text>
+          {/* TODO add number of todo not done */}
+          {/* <Text fontSize="md">{0} todo not done</Text> */}
+        </Stack>
+      </HStack>
+    </RNBTouchable>
   );
 };
-
-const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-  },
-  itemContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-  },
-});

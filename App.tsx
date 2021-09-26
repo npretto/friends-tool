@@ -5,9 +5,9 @@ import {
 } from '@react-navigation/native-stack';
 import { EntityId } from '@reduxjs/toolkit';
 import I18n from 'i18n-js';
-import { NativeBaseProvider } from 'native-base';
+import { Button, Heading, NativeBaseProvider, Stack } from 'native-base';
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { FinderFriendDetail } from './src/features/finder/FinderFriendDetail';
@@ -31,26 +31,42 @@ const HomeScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text> {I18n.t('welcome')}</Text>
-      <Button
-        onPress={() => {
-          navigation.navigate('todo');
-        }}
-        title="ToDo"
-      />
-      <Button
-        onPress={() => {
-          navigation.navigate('finder');
-        }}
-        title="Finder"
-      />
-    </View>
+    <Stack flex={1}>
+      <Heading textAlign="center" my="10" fontSize="3xl" fontWeight="extrabold">
+        Friends Tool
+      </Heading>
+
+      <Heading textAlign="center" fontSize="5xl" mb="10">
+        😊😬😎
+      </Heading>
+
+      <Heading textAlign="center" fontSize="5xl">
+        🔨🧰🔧
+      </Heading>
+      <Stack justifyContent="center" alignItems="center" flex={1}>
+        <Button
+          size="md"
+          mb="10"
+          onPress={() => {
+            navigation.navigate('todo');
+          }}
+        >
+          ToDo
+        </Button>
+        <Button
+          size="md"
+          onPress={() => {
+            navigation.navigate('finder');
+          }}
+        >
+          Finder
+        </Button>
+      </Stack>
+    </Stack>
   );
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const NavigationStack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,33 +79,33 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="home">
-        <Stack.Screen
+      <NavigationStack.Navigator initialRouteName="home">
+        <NavigationStack.Screen
           name={'home'}
           component={HomeScreen}
           options={{ title: I18n.t('home.nav_title') }}
         />
-        <Stack.Screen
+        <NavigationStack.Screen
           name={'todo'}
           component={TodoFriendsListScreen}
           options={{ title: 'TODO' }}
         />
-        <Stack.Screen
+        <NavigationStack.Screen
           name={'todo_detail'}
           component={TodoFriendDetail}
           options={({ route }) => ({ title: route.params.title })}
         />
-        <Stack.Screen
+        <NavigationStack.Screen
           name={'finder'}
           component={FinderFriendsListScreen}
           options={{ title: 'FINDER' }}
         />
-        <Stack.Screen
+        <NavigationStack.Screen
           name={'finder_detail'}
           component={FinderFriendDetail}
           options={() => ({ title: '' })}
         />
-      </Stack.Navigator>
+      </NavigationStack.Navigator>
     </NavigationContainer>
   );
 };
@@ -111,12 +127,3 @@ const ProvidersWrapper = () => (
 );
 
 export default ProvidersWrapper;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

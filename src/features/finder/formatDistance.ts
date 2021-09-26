@@ -5,5 +5,5 @@ export const formatDistance = (meters: number) => {
     return I18n.t('less-than-one-km');
   }
 
-  return `${I18n.toNumber(Math.round(meters / 1000), { precision: 0 })}km`;
+  return `${I18n.toNumber(Math.round(meters / 1000), { precision: 0 })} km`;
 };

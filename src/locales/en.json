@@ -3,6 +3,7 @@
   "address": "Address:",
   "contacts": "Contacts",
   "delete": "Delete",
+  "distance-away": "{{distance}} away",
   "email": "Email",
   "home": {
     "nav_title": "Home"

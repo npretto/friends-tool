@@ -4,7 +4,7 @@ An app I was tasked to do as a test, made with react-native/expo
 
 I used redux toolkit to manage the state, leaving as little logic in components as possible.
 
-UI components are taken form [native-base](https://github.com/GeekyAnts/NativeBase)|
+UI components are taken from [native-base](https://github.com/GeekyAnts/NativeBase)
 
 i18n is handled with i18n-js but currently there are only strings for en
 
