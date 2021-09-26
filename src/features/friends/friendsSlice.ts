@@ -22,5 +22,8 @@ export const friendsReducer = friendsSlice.reducer;
 
 export const { loadFriends } = friendsSlice.actions;
 
-export const { selectIds: selectFriendsId, selectById: selectFriendById } =
-  friendsAdapter.getSelectors((s: RootState) => s.friends);
+export const {
+  selectIds: selectFriendsId,
+  selectById: selectFriendById,
+  selectAll: selectAllFriends,
+} = friendsAdapter.getSelectors((s: RootState) => s.friends);

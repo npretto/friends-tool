@@ -6,23 +6,26 @@ import React from 'react';
 import { FlatList, Text, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootStackParamList } from '../../../App';
-import { navigateToFriend, selectFriendsId } from '../friends';
-import { selectFriendByIdWithDistance } from './finderSlice';
+import { navigateToFriend } from '../friends';
+import {
+  selectFriendByIdWithDistance,
+  selectFriendsSortedByDistance,
+} from './finderSlice';
 import { formatDistance } from './formatDistance';
 import { useLocationWatch } from './useLocationWatch';
 
 const RNBTouchable = Factory(TouchableOpacity);
 
 export const FinderFriendsListScreen = () => {
-  const friendsIds = useSelector(selectFriendsId);
+  const friends = useSelector(selectFriendsSortedByDistance);
 
   useLocationWatch();
 
   return (
     <FlatList
-      data={friendsIds}
-      renderItem={({ item }) => <FinderFriendListItem id={item} />}
-      keyExtractor={(key) => '' + key}
+      data={friends}
+      renderItem={({ item }) => <FinderFriendListItem id={item.id} />}
+      keyExtractor={(item) => '' + item.id}
     />
   );
 };
